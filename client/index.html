@@ -1,17 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Parking Garage</title>
 
-		<!-- external CSS link -->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/style.css">
+<head>
+	<title>Parking Garage</title>
 
-	</head>
-	<body>
+	<!-- external CSS link -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+</head>
 
-		<script src="js/app.js"></script>
-		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
-	</body>
+<body>
+	<input id="refreshButton" type="button" value="Refresh" /><br />
+	<table id="transactionTable">
+		<thead>
+			<td>License</td>
+			<td>Price</td>
+			<td>Duration</td>
+			<td>In</td>
+			<td>Out</td>
+		</thead>
+	</table>
+	<template id="transactionRowTemplate">
+		<tr class="transaction-row">
+			<td class="license-cell"></td>
+			<td class="price-cell"></td>
+			<td class="duration-cell"></td>
+			<td class="in-cell"></td>
+			<td class="out-cell"></td>
+		</tr>
+	</template>
+	<template id="errorTemplate">
+		<div class="error-display" style="color: red;">
+			Could not load data.
+		</div>
+	</template>
+	<script src="js/app.js"></script>
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
+</body>
+
 </html>

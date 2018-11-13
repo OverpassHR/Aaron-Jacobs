@@ -32,11 +32,25 @@ body {
      background: #FFF;
 }
 
-
 /******************************************
 /* LAYOUT
 /*******************************************/
 
+.hidden {
+    display: none;
+}
+
+.transaction-row td {
+    padding: 5px;
+}
+
+.more-than-day-row {
+    background-color: red;
+}
+
+.less-than-hour-row {
+    background-color: blue;
+}
 
 /******************************************
 /* ADDITIONAL STYLES
