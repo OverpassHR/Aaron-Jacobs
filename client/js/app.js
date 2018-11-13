@@ -68,7 +68,11 @@ function updateUI(data, error) {
 
             const durationRounded = Math.round((entry.out - entry.in) / HOUR_MS_OVER_100) / 100;
             const durationHours = (entry.out - entry.in) / HOUR_MS;
-            const billableHours = Math.max(durationHours - 1, 0);
+
+            const promotionCode = entry.promotion ? Object.keys(entry.promotion)[0]: null;
+            const promotionHours = promotionCode ? entry.promotion[promotionCode].time / HOUR_MS : 0;
+
+            const billableHours = Math.max(durationHours - 1 - promotionHours, 0);
             const price = billableHours * PRICE_HOUR;
             const roundedPrice = Math.round(billableHours * PRICE_HOUR_TIMES_100) / 100
 
@@ -79,11 +83,13 @@ function updateUI(data, error) {
             ref.querySelector('.duration-cell').innerHTML = durationRounded;
             ref.querySelector('.price-cell').innerHTML = `$${roundedPrice}`;
 
+            if (entry.promotion) ref.querySelector('.promotion-cell').innerHTML = `${promotionCode} (${promotionHours} Hrs.)`;
+
             const rowRef = ref.querySelector('.transaction-row');
 
             if (durationHours >= 24) {
                 rowRef.classList.add('more-than-day-row')
-            } else if (durationHours < 1) {
+            } else if (billableHours <= 0) {
                 rowRef.classList.add('less-than-hour-row')
             }
 
